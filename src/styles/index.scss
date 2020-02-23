@@ -1,0 +1,43 @@
+$mid-dark-gray:#DCDCDC; //border
+$dark-gray:#6F6F6F; //text light
+$dark-charcoal: #232323; // text dark
+$white:#FFFFFF;
+$green: #2ED06E;
+$red: #FB2B1D;
+$mid-light-gray: #E8E8E8; // bgs
+$border-radius: 4px;
+$border-width: 1px;
+
+$s-xl-min: 1025px;
+$s-lg-max: $s-xl-min - 1;
+$s-lg-min: 768px;
+$s-sm-max: $s-lg-min - 1;
+$s-sm-min: 1025px;
+$s-xs-max: $s-sm-min - 1;
+$s-xs-min: 320px;
+
+@mixin breakpoint($class) {
+    @if $class == desktop {
+        @media (min-width: $s-xl-min) {
+            @content;   
+        }
+    }
+    @else if $class == tablets {
+        @media (min-width: $s-lg-min) and (max-width: $s-lg-max) {
+            @content;      
+        }
+    }
+    @else if $class == mobile-landscape {
+        @media (min-width: $s-sm-min) and (max-width: $s-sm-max) {
+            @content;   
+        }
+    }
+    @else if $class == mobile {
+        @media (min-width: $s-xs-min) and (max-width: $s-xs-max) {
+            @content;   
+        }
+    }
+    @else {
+        @warn "not present"
+    }
+}
