@@ -1,19 +1,22 @@
 import { IFetchResponse } from "./IFetchResponse";
 import { VesselBookmarkResponse } from "./Models/VesselBookmarkResponse";
 import { DetailedVasselBookmarkResponse } from "./Models/DetailedVasselBookmarkResponse";
+import * as constants from "@/helper/constants";
 
 export default class BookmarkClient {
   private readonly baseUrl: string;
   private readonly token: string;
-
+ 
   constructor(baseUrl: string, token: string) {
     this.baseUrl = baseUrl;
     this.token = token;
   }
 
   public async getVasselBookmarks() {
-    // await new Promise((r) => setTimeout(r, 1000));
-    return (await fetch(`${this.baseUrl}/api/v1/scoped/eta/vessel-bookmarks`, {
+    // ToDo: Remove timer 
+    // show skeleton effect
+    // await new Promise((r) => setTimeout(r, 500));
+    return (await fetch(`${this.baseUrl}${constants.allBookmarksUrl}`, {
       method: "get",
       credentials: "include",
       headers: {
@@ -25,8 +28,10 @@ export default class BookmarkClient {
   }
 
   public async getVasselBookmarkAfter(datetime: Date) {
-    // await new Promise((r) => setTimeout(r, 1000));
-    return (await fetch(`${this.baseUrl}/api/v1/scoped/eta/vessel-bookmarks?_start_after=${datetime}`, {
+    // ToDo: Remove timer 
+    // show skeleton effect
+    await new Promise((r) => setTimeout(r, 500));  
+    return (await fetch(`${this.baseUrl}${constants.nextBookmarksUrl}${datetime}`, {
       method: "get",
       credentials: "include",
       headers: {
@@ -38,9 +43,11 @@ export default class BookmarkClient {
   }
 
   public async getVoyageDetails(id: string) {
-    // await new Promise((r) => setTimeout(r, 1000));
+    // ToDo: Remove timer 
+    // show skeleton effect
+    await new Promise((r) => setTimeout(r, 500));
     return (await fetch(
-      `${this.baseUrl}/api/v1/scoped/eta/detailed-tracking/vessel-bookmarks/${id}`,
+      `${this.baseUrl}${constants.aDetailedBookmarkUrl}${id}`,
       {
         method: "get",
         credentials: "include",

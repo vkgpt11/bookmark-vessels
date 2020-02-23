@@ -1,7 +1,7 @@
 <template>
   <div class="voyage-details">
-    <LatestVoyage class="child" :loading="isLoadingVoyageDetails" :latest="latest"></LatestVoyage>
-    <TargetVoyage class="child" :loading="isLoadingVoyageDetails" :target="target"></TargetVoyage>
+    <LatestVoyage class="child" :isLoading="isLoadingVoyageDetails" :latest="latest"></LatestVoyage>
+    <TargetVoyage class="child" :isLoading="isLoadingVoyageDetails" :target="target"></TargetVoyage>
   </div>
 </template>
 

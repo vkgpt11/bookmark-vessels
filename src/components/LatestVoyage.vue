@@ -1,21 +1,21 @@
 <template>
   <div class="latest-voyage">
-    <div class="parent" v-if="!loading">
+    <div class="parent" v-if="!isLoading">
       <div class="child basis30">
-        <div class="label">Latest Port</div>
+        <div class="label">{{constants.latestPort}}</div>
         <div class="port">{{port}}</div>
       </div>
       <div class="child basis70">
-        <div class="label">Departure</div>
+        <div class="label">{{constants.departure}}</div>
         <div class="depart-date">{{actualDepart}}</div>
         <div class="separate"></div>
-        <div class="label">Carrier Provided ({{activeScac}})</div>
+        <div class="label">{{constants.carrierProvided}} ({{activeScac}})</div>
         <div class="carrier-provided">{{scheduledDepart}}</div>
       </div>
     </div>
 
     <skeleton-card
-      v-if="loading"
+      v-if="isLoading"
       class="skeleton"
       :lines="2"
       :isLoading="true"
@@ -34,6 +34,7 @@ import SkeletonCard from "vue-skeleton-screen";
 import BookmarksModule from "@/store/modules/BookmarksModule";
 import { VoyageDetail } from "../api/Models/VoyageDetail";
 import moment from "moment";
+import * as constants from "@/helper/constants";
 
 @Component({
   components: {
@@ -42,9 +43,14 @@ import moment from "moment";
 })
 export default class LatestVoyage extends Vue {
   @Prop()
-  public loading: boolean = false;
+  public isLoading: boolean = false;
+  
   @Prop()
   public latest!: VoyageDetail;
+
+  get constants(){
+    return  constants;
+  }
 
   get activeScac() {
     return this.latest.active_scac;

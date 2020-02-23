@@ -1,24 +1,24 @@
 <template>
   <div class="target-voyage">
-    <div class="parent" v-if="!loading">
+    <div class="parent" v-if="!isLoading">
       <div class="child basis30">
-        <div class="label">Target Port</div>
+        <div class="label">{{constants.targetPort}}</div>
         <div class="port">{{port}}</div>
       </div>
       <div class="child basis70">
-        <div class="label">Arrival</div>
+        <div class="label">{{constants.arrival}}</div>
         <div :class="shouldFlag?'depart-date flag':'depart-date'">
           <span :class="shouldFlag?'indicator flag':'indicator'">{{predictedOrActual}}</span>
           {{predictedArrival}}
         </div>
         <div class="separate"></div>
-        <div class="label">Carrier Provided ({{activeScac}})</div>
+        <div class="label">{{constants.carrierProvided}} ({{activeScac}})</div>
         <div class="carrier-provided">{{scheduledArrival}}</div>
       </div>
     </div>
 
     <skeleton-card
-      v-if="loading"
+      v-if="isLoading"
       class="skeleton"
       :lines="1"
       :isLoading="true"
@@ -37,6 +37,7 @@ import SkeletonCard from "vue-skeleton-screen";
 import BookmarksModule from "@/store/modules/BookmarksModule";
 import { VoyageDetail } from "@/api/Models/VoyageDetail";
 import moment from "moment";
+import * as constants from "@/helper/constants";
 
 @Component({
   components: {
@@ -45,16 +46,22 @@ import moment from "moment";
 })
 export default class TargetVoyage extends Vue {
   @Prop()
-  public loading: boolean = false;
+  public isLoading: boolean = false;
   @Prop()
   public target!: VoyageDetail;
+
+  get constants(){
+    return  constants;
+  }
 
   get activeScac() {
     return this.target.active_scac;
   }
+
   get port() {
     return this.target.port_name;
   }
+
   get predictedArrival() {
     const date = new Date(
       this.target.actual_arrival_lt
@@ -67,6 +74,7 @@ export default class TargetVoyage extends Vue {
   get predictedOrActual() {
     return this.target.actual_arrival_lt ? "A" : "P";
   }
+
   get scheduledArrival() {
     const date = new Date(this.target.scheduled_arrival_lt);
     return moment(date).format("MMM DD hh:mm");

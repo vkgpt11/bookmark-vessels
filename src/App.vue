@@ -9,7 +9,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js");
 
 @import "./styles/index.scss";
-* {
+* { 
   font-family: "Source Sans Pro", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

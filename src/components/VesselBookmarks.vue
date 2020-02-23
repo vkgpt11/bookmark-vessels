@@ -14,17 +14,6 @@
         :actions="false"
         :round="true"
       ></skeleton-card>
-      <skeleton-card
-        v-if="isLoading"
-        class="skeleton"
-        :lines="3"
-        :isLoading="true"
-        :media="false"
-        :header="false"
-        :avatar="false"
-        :actions="false"
-        :round="true"
-      ></skeleton-card>
     </div>
   </div>
 </template>
@@ -82,6 +71,10 @@ export default class VesselBookmarks extends Vue {
     }
   }
 
+  private async mounted() {
+    await this.getBookmarks();
+  }
+
   private async getBookmarks() {
     BookmarksModule.clearBookmarks();
     BookmarksModule.changeLoading(true);
@@ -115,10 +108,6 @@ export default class VesselBookmarks extends Vue {
     margin: 1em;
     padding: 1em 0;
     border-radius: $border-radius;
-    display: block;
-    .child {
-      display: inline;
-    }
   }
 }
 </style>
