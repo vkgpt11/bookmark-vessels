@@ -132,7 +132,7 @@ export default class TargetVoyage extends Vue {
       }
       .indicator {
         padding: 5px;
-        font-size: 8px;
+        font-size: 10px;
         background: $green;
         color: white;
         border-radius: $border-radius;
