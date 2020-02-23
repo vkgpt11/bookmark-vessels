@@ -6,12 +6,24 @@
       <skeleton-card
         v-if="isLoading"
         class="skeleton"
-        :lines="2"
+        :lines="3"
         :isLoading="true"
         :media="false"
         :header="false"
         :avatar="false"
         :actions="false"
+        :round="true"
+      ></skeleton-card>
+      <skeleton-card
+        v-if="isLoading"
+        class="skeleton"
+        :lines="3"
+        :isLoading="true"
+        :media="false"
+        :header="false"
+        :avatar="false"
+        :actions="false"
+        :round="true"
       ></skeleton-card>
     </div>
   </div>
@@ -99,9 +111,14 @@ export default class VesselBookmarks extends Vue {
 
   .skeleton {
     box-shadow: none;
-    margin: 0;
-    margin-top: 1em;
-    padding: 0;
+    border: $border-width solid $mid-dark-gray;
+    margin: 1em;
+    padding: 1em 0;
+    border-radius: $border-radius;
+    display: block;
+    .child {
+      display: inline;
+    }
   }
 }
 </style>

@@ -31,9 +31,8 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx", "src/Definitions/vue-skeleton-screen.d.ts.sdfsdf"
-  ],
+    "tests/**/*.ts"  
+	],
   "exclude": [
     "node_modules"
   ]

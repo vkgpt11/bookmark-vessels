@@ -23,6 +23,7 @@
       :header="false"
       :avatar="false"
       :actions="false"
+      :round = "true"
     ></skeleton-card>
   </div>
 </template>

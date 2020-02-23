@@ -15,4 +15,16 @@
   -moz-osx-font-smoothing: grayscale;
   color: $dark-charcoal;
 }
+
+.skeleton-card__text-title {
+  width: 0  !important;
+  height: 0 !important;
+  margin-bottom: 0 !important;
+}
+.skeleton-card__text-container {
+  padding-right: 0px !important;
+}
+.skeleton-card__text {
+    margin-top: 6px !important;
+}
 </style>

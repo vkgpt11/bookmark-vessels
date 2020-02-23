@@ -43,7 +43,7 @@ export default class VoyageDetails extends Vue {
     if (this.listVoyageDetail && this.listVoyageDetail.length > 0) {
       return this.listVoyageDetail[this.listVoyageDetail.length - 1];
     }
-    return;
+    return this.emptyVoyageDetail();
   }
 
   private emptyVoyageDetail(): VoyageDetail {

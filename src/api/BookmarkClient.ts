@@ -12,7 +12,7 @@ export default class BookmarkClient {
   }
 
   public async getVasselBookmarks() {
-    await new Promise((r) => setTimeout(r, 1000));
+    // await new Promise((r) => setTimeout(r, 1000));
     return (await fetch(`${this.baseUrl}/api/v1/scoped/eta/vessel-bookmarks`, {
       method: "get",
       credentials: "include",
@@ -25,7 +25,7 @@ export default class BookmarkClient {
   }
 
   public async getVasselBookmarkAfter(datetime: Date) {
-    await new Promise((r) => setTimeout(r, 1000));
+    // await new Promise((r) => setTimeout(r, 1000));
     return (await fetch(`${this.baseUrl}/api/v1/scoped/eta/vessel-bookmarks?_start_after=${datetime}`, {
       method: "get",
       credentials: "include",
@@ -38,7 +38,7 @@ export default class BookmarkClient {
   }
 
   public async getVoyageDetails(id: string) {
-    await new Promise((r) => setTimeout(r, 1000));
+    // await new Promise((r) => setTimeout(r, 1000));
     return (await fetch(
       `${this.baseUrl}/api/v1/scoped/eta/detailed-tracking/vessel-bookmarks/${id}`,
       {

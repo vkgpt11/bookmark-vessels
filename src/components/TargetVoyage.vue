@@ -20,12 +20,13 @@
     <skeleton-card
       v-if="loading"
       class="skeleton"
-      :lines="2"
+      :lines="1"
       :isLoading="true"
       :media="false"
       :header="false"
       :avatar="false"
       :actions="false"
+      :round = "true"
     ></skeleton-card>
   </div>
 </template>
