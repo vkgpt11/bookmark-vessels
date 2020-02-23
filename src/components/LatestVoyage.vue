@@ -59,12 +59,10 @@ export default class LatestVoyage extends Vue {
     return this.latest.port_name;
   }
   get actualDepart() {
-    const date = new Date(this.latest.actual_departure_lt);
-    return moment(date).format("MMM DD hh:mm");
+    return moment(this.latest.actual_departure_lt).format("MMM DD hh:mm");
   }
   get scheduledDepart() {
-    const date = new Date(this.latest.scheduled_departure_lt);
-    return moment(date).format("MMM DD hh:mm");
+    return moment(this.latest.scheduled_departure_lt).format("MMM DD hh:mm");
   }
 }
 </script>

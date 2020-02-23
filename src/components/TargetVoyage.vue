@@ -26,7 +26,7 @@
       :header="false"
       :avatar="false"
       :actions="false"
-      :round = "true"
+      :round="true"
     ></skeleton-card>
   </div>
 </template>
@@ -50,8 +50,8 @@ export default class TargetVoyage extends Vue {
   @Prop()
   public target!: VoyageDetail;
 
-  get constants(){
-    return  constants;
+  get constants() {
+    return constants;
   }
 
   get activeScac() {
@@ -63,11 +63,10 @@ export default class TargetVoyage extends Vue {
   }
 
   get predictedArrival() {
-    const date = new Date(
-      this.target.actual_arrival_lt
-        ? this.target.actual_arrival_lt
-        : this.target.predicted_arrival_lt
-    );
+    const date = this.target.actual_arrival_lt
+      ? this.target.actual_arrival_lt
+      : this.target.predicted_arrival_lt;
+
     return moment(date).format("MMM DD hh:mm");
   }
 
@@ -76,8 +75,7 @@ export default class TargetVoyage extends Vue {
   }
 
   get scheduledArrival() {
-    const date = new Date(this.target.scheduled_arrival_lt);
-    return moment(date).format("MMM DD hh:mm");
+    return moment(this.target.scheduled_arrival_lt).format("MMM DD hh:mm");
   }
 
   get shouldFlag() {
