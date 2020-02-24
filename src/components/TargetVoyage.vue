@@ -94,18 +94,18 @@ export default class TargetVoyage extends Vue {
     ).format("DD");
 
     const monthPredictedArrival = moment(
-      this.target.scheduled_arrival_lt,
+      this.target.predicted_arrival_lt,
       "YYYY-MM-DDTHH:mm"
     ).format("MMM");
 
     const dayPredictedArrival = moment(
-      this.target.scheduled_arrival_lt,
+      this.target.predicted_arrival_lt,
       "YYYY-MM-DDTHH:mm"
     ).format("DD");
 
     return (
-      monthScheduleArrival !== monthPredictedArrival ||
-      dayScheduleArrival !== dayPredictedArrival
+      !(monthScheduleArrival === monthPredictedArrival &&
+      dayScheduleArrival === dayPredictedArrival)
     );
   }
 }
