@@ -66,8 +66,7 @@ export default class TargetVoyage extends Vue {
     const date = this.target.actual_arrival_lt
       ? this.target.actual_arrival_lt
       : this.target.predicted_arrival_lt;
-
-    return moment(date).format("MMM DD hh:mm");
+    return moment(date, "YYYY-MM-DDTHH:mm").format("MMM DD hh:mm");
   }
 
   get predictedOrActual() {
@@ -75,17 +74,38 @@ export default class TargetVoyage extends Vue {
   }
 
   get scheduledArrival() {
-    return moment(this.target.scheduled_arrival_lt).format("MMM DD hh:mm");
+    return moment(this.target.scheduled_arrival_lt, "YYYY-MM-DDTHH:mm").format(
+      "MMM DD hh:mm"
+    );
   }
 
   get shouldFlag() {
-    const scheduleDate = new Date(this.target.scheduled_arrival_lt);
-    const predictedDate = new Date(this.target.predicted_arrival_lt);
+    if (!this.target.predicted_arrival_lt) {
+      return false;
+    }
+    const monthScheduleArrival = moment(
+      this.target.scheduled_arrival_lt,
+      "YYYY-MM-DDTHH:mm"
+    ).format("MMM");
+
+    const dayScheduleArrival = moment(
+      this.target.scheduled_arrival_lt,
+      "YYYY-MM-DDTHH:mm"
+    ).format("DD");
+
+    const monthPredictedArrival = moment(
+      this.target.scheduled_arrival_lt,
+      "YYYY-MM-DDTHH:mm"
+    ).format("MMM");
+
+    const dayPredictedArrival = moment(
+      this.target.scheduled_arrival_lt,
+      "YYYY-MM-DDTHH:mm"
+    ).format("DD");
 
     return (
-      this.predictedOrActual !== "A" &&
-      (scheduleDate.getMonth() !== predictedDate.getMonth() ||
-        scheduleDate.getDate() !== predictedDate.getDate())
+      monthScheduleArrival !== monthPredictedArrival ||
+      dayScheduleArrival !== dayPredictedArrival
     );
   }
 }
@@ -132,7 +152,7 @@ export default class TargetVoyage extends Vue {
       }
       .indicator {
         padding: 5px;
-        font-size: 8px;
+        font-size: 12px;
         background: $green;
         color: white;
         border-radius: $border-radius;

@@ -11,6 +11,7 @@ import LatestVoyage from "./LatestVoyage.vue";
 import TargetVoyage from "./TargetVoyage.vue";
 import BookmarksModule from "@/store/modules/BookmarksModule";
 import { VoyageDetail } from "@/api/Models/VoyageDetail";
+import moment from "moment";
 
 @Component({
   components: {
@@ -30,10 +31,30 @@ export default class VoyageDetails extends Vue {
     const result = await BookmarksModule.getVoyageDetails(this.id);
     this.listVoyageDetail = result.voyage_details;
     this.isLoadingVoyageDetails = false;
+
+    const scheduledArrivalMonth = moment(
+      this.target.scheduled_arrival_lt,
+      "YYYY-MM-DDTHH:mm"
+    ).format("MMM");
+
+    const scheduledArrivalDate = moment(
+      this.target.scheduled_arrival_lt,
+      "YYYY-MM-DDTHH:mm"
+    ).format("DD");
+    
+    this.$emit(
+      "changedCarrierProvided",
+      scheduledArrivalMonth,
+      scheduledArrivalDate
+    );
   }
 
   get latest() {
-    const e = this.listVoyageDetail.filter((x) => x.actual_departure_lt);
+    let e = this.listVoyageDetail.filter(x => x.actual_departure_lt);
+    if (!e) {
+      e = this.listVoyageDetail.filter(x => x.actual_arrival_lt);
+      console.log("got here");
+    }
     if (e && e.length > 0) {
       return e[e.length - 1];
     }

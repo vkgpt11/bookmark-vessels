@@ -89,7 +89,7 @@ export default class VesselBookmarks extends Vue {
 
 .vessel-bookmarks {
   overflow: scroll;
-  height: 400px; // hard coded to show the scroll bar for Skeleton
+  height: 600px; // hard coded to show the scroll bar for Skeleton
   overflow-y: auto;
   overflow-x: hidden;
   margin-top: 1em;

@@ -3,7 +3,7 @@
     <div class="vessel">{{vesselName}}</div>
     <div class="carrier-no">{{carrierNo}}</div>
     <div class="port">{{portName}}</div>
-    <div class="date">{{date}}</div>
+    <div :class="shouldFlag?'date':'date flag'">{{date}}</div>
   </div>
 </template>
 
@@ -16,6 +16,8 @@ import moment from "moment";
 export default class VesselBookmarkSummary extends Vue {
   @Prop()
   public vesselBookmark!: VesselBookmark;
+  @Prop({ default: false })
+  private shouldFlag!: boolean;
 
   get vesselName() {
     return this.vesselBookmark.vessel_name;
@@ -27,8 +29,10 @@ export default class VesselBookmarkSummary extends Vue {
     return this.vesselBookmark.target_port_name;
   }
   get date() {
-    const date = new Date(this.vesselBookmark.target_port_eta);
-    return moment(date).format("MMM DD");
+    return moment(
+      this.vesselBookmark.target_port_eta,
+      "YYYY-MM-DDTHH:mm"
+    ).format("MMM DD");
   }
 }
 </script>
@@ -56,6 +60,9 @@ export default class VesselBookmarkSummary extends Vue {
     margin-left: 0.5em;
     display: inline-block;
     color: $green;
+    &.flag {
+      color: red;
+    }
   }
 }
 </style>

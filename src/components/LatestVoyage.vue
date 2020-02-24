@@ -6,8 +6,8 @@
         <div class="port">{{port}}</div>
       </div>
       <div class="child basis70">
-        <div class="label">{{constants.departure}}</div>
-        <div class="depart-date">{{actualDepart}}</div>
+        <div class="label">{{arrivalOrDepartLabel}}</div>
+        <div class="depart-date">{{actualarrivalOrDepart}}</div>
         <div class="separate"></div>
         <div class="label">{{constants.carrierProvided}} ({{activeScac}})</div>
         <div class="carrier-provided">{{scheduledDepart}}</div>
@@ -23,7 +23,7 @@
       :header="false"
       :avatar="false"
       :actions="false"
-      :round = "true"
+      :round="true"
     ></skeleton-card>
   </div>
 </template>
@@ -44,12 +44,12 @@ import * as constants from "@/helper/constants";
 export default class LatestVoyage extends Vue {
   @Prop()
   public isLoading: boolean = false;
-  
+
   @Prop()
   public latest!: VoyageDetail;
 
-  get constants(){
-    return  constants;
+  get constants() {
+    return constants;
   }
 
   get activeScac() {
@@ -58,11 +58,29 @@ export default class LatestVoyage extends Vue {
   get port() {
     return this.latest.port_name;
   }
-  get actualDepart() {
-    return moment(this.latest.actual_departure_lt).format("MMM DD hh:mm");
+  get actualarrivalOrDepart() {
+    if (this.latest.actual_departure_lt) {
+      return moment(this.latest.actual_departure_lt, "YYYY-MM-DDTHH:mm").format(
+        "MMM DD hh:mm"
+      );
+    }
+    return moment(this.latest.actual_arrival_lt, "YYYY-MM-DDTHH:mm").format(
+      "MMM DD hh:mm"
+    );
   }
+
+  get arrivalOrDepartLabel() {
+    if (this.latest.actual_departure_lt) {
+      return this.constants.departure;
+    }
+    return this.constants.arrival;
+  }
+
   get scheduledDepart() {
-    return moment(this.latest.scheduled_departure_lt).format("MMM DD hh:mm");
+    return moment(
+      this.latest.scheduled_departure_lt,
+      "YYYY-MM-DDTHH:mm"
+    ).format("MMM DD hh:mm");
   }
 }
 </script>

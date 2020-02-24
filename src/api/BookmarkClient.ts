@@ -30,7 +30,7 @@ export default class BookmarkClient {
   public async getVasselBookmarkAfter(datetime: Date) {
     // ToDo: Remove timer 
     // show skeleton effect
-    await new Promise((r) => setTimeout(r, 500));  
+    await new Promise((r) => setTimeout(r, 1000));  
     return (await fetch(`${this.baseUrl}${constants.nextBookmarksUrl}${datetime}`, {
       method: "get",
       credentials: "include",
@@ -45,7 +45,7 @@ export default class BookmarkClient {
   public async getVoyageDetails(id: string) {
     // ToDo: Remove timer 
     // show skeleton effect
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 1000));
     return (await fetch(
       `${this.baseUrl}${constants.aDetailedBookmarkUrl}${id}`,
       {
